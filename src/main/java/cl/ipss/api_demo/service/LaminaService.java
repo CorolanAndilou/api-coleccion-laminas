@@ -9,4 +9,5 @@ public interface LaminaService {
     List<LaminaModel> listarPorAlbum(Long albumId);
     List<LaminaModel> faltantes(Long albumId);
     List<LaminaModel> repetidas(Long albumId);
+    int contarRepetidas(Long albumId);
 }

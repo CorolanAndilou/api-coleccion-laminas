@@ -25,6 +25,9 @@ public class LaminaModel {
     @Column(nullable = false)
     private Integer tipo;
 
+    @Column(nullable = false)
+    private Integer cantidad = 1;
+
     @Enumerated(EnumType.STRING)
     private Rareza rareza;
 

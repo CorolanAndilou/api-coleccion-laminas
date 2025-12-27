@@ -37,7 +37,17 @@ public class LaminaServiceImpl implements LaminaService{
     public List<LaminaModel> repetidas(Long albumId) {
         return laminaRepository.findByAlbumAlbumId(albumId)
                 .stream()
-                .filter(l -> l.getTipo() > 1)
+                .filter(l -> l.getTipo() == 2)
                 .toList();
     }
+
+    @Override
+    public int contarRepetidas(Long albumId) {
+        return laminaRepository.findByAlbumAlbumId(albumId)
+            .stream()
+            .filter(l -> l.getTipo() == 2)
+            .mapToInt(l -> l.getCantidad() != null ? l.getCantidad() : 1)
+            .sum();
+    }
+
 }
