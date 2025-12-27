@@ -7,4 +7,5 @@ import cl.ipss.api_demo.model.*;
 
 public interface ColeccionRepository extends JpaRepository<ColeccionModel, Long> {
     List<ColeccionModel> findByUsuarioUsuarioId(Long usuarioId);
+    int countByAlbumAlbumIdAndUsuarioUsuarioId(Long albumId, Long usuarioId);
 }

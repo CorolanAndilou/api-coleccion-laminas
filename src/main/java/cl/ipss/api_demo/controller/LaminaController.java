@@ -35,4 +35,8 @@ public class LaminaController {
         return laminaService.repetidas(albumId);
     }
 
+    @GetMapping("/contar/{albumId}")
+    public int contarPorAlbum(@PathVariable Long albumId){
+        return laminaService.listarPorAlbum(albumId).size();
+    }
 }

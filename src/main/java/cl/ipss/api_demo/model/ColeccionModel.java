@@ -14,6 +14,7 @@ public class ColeccionModel {
     private Long coleccionId;
 
     private boolean estado;
+    
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")

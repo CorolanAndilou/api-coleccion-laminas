@@ -2,6 +2,8 @@ package cl.ipss.api_demo.service.impl;
 
 import cl.ipss.api_demo.model.*;
 import cl.ipss.api_demo.repository.AlbumRepository;
+import cl.ipss.api_demo.repository.ColeccionRepository;
+import cl.ipss.api_demo.repository.LaminaRepository;
 import cl.ipss.api_demo.service.AlbumService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ import java.util.List;
 
 public class AlbumServiceImpl implements AlbumService {
     private final AlbumRepository albumRepository;
+    private final LaminaRepository laminaRepository;
+    private final ColeccionRepository coleccionRepository;
+
 
     @Override
     public AlbumModel crearAlbum(AlbumModel album) {
@@ -43,4 +48,28 @@ public class AlbumServiceImpl implements AlbumService {
     public AlbumModel buscarPorId(Long id) {
         return albumRepository.findById(id).orElseThrow();
     }
+
+    @Override
+public boolean completarAlbum(Long albumId, Long usuarioId) {
+
+    int total = laminaRepository.findByAlbumAlbumId(albumId).size();
+    int coleccionadas = coleccionRepository.countByAlbumAlbumIdAndUsuarioUsuarioId(albumId, usuarioId);
+
+    if(total == coleccionadas){
+
+        ColeccionModel c = coleccionRepository
+                .findByUsuarioUsuarioId(usuarioId)
+                .stream()
+                .filter(x -> x.getAlbum().getAlbumId().equals(albumId))
+                .findFirst()
+                .orElseThrow();
+
+        c.setEstado(true);
+        coleccionRepository.save(c);
+        return true;
+    }
+
+    return false;
+}
+
 }

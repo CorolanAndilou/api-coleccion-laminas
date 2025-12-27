@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "album")
@@ -24,5 +25,6 @@ public class AlbumModel {
     private EditorialModel editorial;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<LaminaModel> laminas;
 }

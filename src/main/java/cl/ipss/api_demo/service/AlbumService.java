@@ -10,4 +10,6 @@ public interface AlbumService {
     void eliminarAlbum(Long id);
     List<AlbumModel> listar();
     AlbumModel buscarPorId(Long id);
+    boolean completarAlbum(Long albumId, Long usuarioId);
+
 }

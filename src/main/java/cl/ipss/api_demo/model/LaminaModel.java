@@ -1,5 +1,6 @@
 package cl.ipss.api_demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,14 +14,24 @@ public class LaminaModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long laminaId;
 
-    private String nombreLamina;
-    private String descripcion;
-    private Integer tipo;
-    //private String rareza -- cambiar a enum si hay tiempo
-    private String imagen;
+    @Column(nullable = false)
+    private String codigoLocal;
 
+    @Column(nullable = false)
+    private String nombreLamina;
+
+    private String descripcion;
+
+    @Column(nullable = false)
+    private Integer tipo;
+
+    @Enumerated(EnumType.STRING)
+    private Rareza rareza;
+
+    private String imagen;
 
     @ManyToOne
     @JoinColumn(name = "album_id")
+    @JsonBackReference
     private AlbumModel album;
 }
